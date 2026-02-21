@@ -1,3 +1,18 @@
-2026/02/21-10:27:57.879 47f4 Reusing MANIFEST C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2026/02/21-10:27:57.880 47f4 Recovering log #245
-2026/02/21-10:27:57.939 47f4 Reusing old log C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000245.log 
+2026/02/21-10:45:32.202 38b8 Reusing MANIFEST C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/02/21-10:45:32.202 38b8 Recovering log #245
+2026/02/21-10:45:32.324 38b8 Reusing old log C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000245.log 
+2026/02/21-10:45:45.015 47e0 Level-0 table #258: started
+2026/02/21-10:45:45.075 47e0 Level-0 table #258: 1149708 bytes OK
+2026/02/21-10:45:45.081 47e0 Delete type=0 #245
+2026/02/21-10:45:45.750 349c Compacting 1@1 + 9@2 files
+2026/02/21-10:45:45.866 349c Generated table #259@1: 45175 keys, 2178681 bytes
+2026/02/21-10:45:46.038 349c Generated table #260@1: 102938 keys, 2252414 bytes
+2026/02/21-10:45:46.157 349c Generated table #261@1: 64419 keys, 2230815 bytes
+2026/02/21-10:45:46.346 349c Generated table #262@1: 3179 keys, 2156915 bytes
+2026/02/21-10:45:46.593 349c Generated table #263@1: 2352 keys, 2149669 bytes
+2026/02/21-10:45:46.696 349c Generated table #264@1: 2242 keys, 2149418 bytes
+2026/02/21-10:45:46.828 349c Generated table #265@1: 2416 keys, 2150271 bytes
+2026/02/21-10:45:47.167 349c Generated table #266@1: 28756 keys, 2237137 bytes
+2026/02/21-10:45:47.335 349c Generated table #267@1: 24598 keys, 1684009 bytes
+2026/02/21-10:45:47.336 349c Compacted 1@1 + 9@2 files => 19189329 bytes
+2026/02/21-10:45:47.345 349c compacted to: files[ 0 0 9 0 0 0 0 ]
