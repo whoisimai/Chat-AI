@@ -1,2 +1,3 @@
-2026/02/21-09:56:47.348 4e50 Creating DB C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb since it was missing.
-2026/02/21-09:56:47.357 4e50 Reusing MANIFEST C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/02/21-10:27:57.879 47f4 Reusing MANIFEST C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/02/21-10:27:57.880 47f4 Recovering log #245
+2026/02/21-10:27:57.939 47f4 Reusing old log C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000245.log 
