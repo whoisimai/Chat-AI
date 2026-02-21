@@ -112,7 +112,7 @@ async function getAIReply(userId, userMessage) {
 
   // Call Groq API
   const response = await groq.chat.completions.create({
-    model: "llama-3.1-8b-instant", // Free, fast Llama model on Groq
+    model: "llama-3.3-70b-versatile", // Free, fast Llama model on Groq
     messages: [
       {
         role: "system",
