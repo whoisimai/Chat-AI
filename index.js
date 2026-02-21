@@ -1,4 +1,4 @@
-require("dotenv").config();
+import dotenv from "dotenv";
 import pkg from "whatsapp-web.js";
 const { Client, LocalAuth } = pkg;
 
@@ -10,6 +10,7 @@ import { buildSystemPrompt, persona } from "./persona.js";
 
 
 // SETUP
+dotenv.config();
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 // Stores conversation history per contact (so AI remembers context)
