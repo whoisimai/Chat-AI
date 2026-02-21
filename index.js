@@ -53,15 +53,9 @@ client.on("auth_failure", () => {
 client.on("message", async (message) => {
   try {
     // For group messages, use participant; for individual chats, use from
-    const senderId = message.participant || message.from;
+    const senderId = message.from;
     const senderPhoneNumber = senderId.split("@")[0];
     const expectedPhoneNumber = process.env.GF_PHONE_NUMBER;
-    
-    console.log(`[DEBUG] message.from: ${message.from}`);
-    console.log(`[DEBUG] message.participant: ${message.participant}`);
-    console.log(`[DEBUG] senderId (used): ${senderId}`);
-    console.log(`[DEBUG] Sender phone number: ${senderPhoneNumber}`);
-    console.log(`[DEBUG] Expected phone number: ${expectedPhoneNumber}`);
 
     // Only respond to messages from your girlfriend (compare just the phone number)
     if (senderPhoneNumber !== expectedPhoneNumber) {
