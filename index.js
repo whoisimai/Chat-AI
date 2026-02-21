@@ -2,10 +2,8 @@ import dotenv from "dotenv";
 import pkg from "whatsapp-web.js";
 const { Client, LocalAuth } = pkg;
 
-import qrPkg from "qrcode-terminal";
+import QRCode from "qrcode-terminal";
 import Groq from "groq-sdk";
-
-const { generate } = qrPkg;
 import { buildSystemPrompt, persona } from "./persona.js";
 
 
@@ -38,9 +36,7 @@ const client = new Client({
 client.on("qr", (qr) => {
   console.log("\nScan this QR code with WhatsApp on your phone:");
   console.log("   (WhatsApp > Linked Devices > Link a Device)\n");
-  generate(qr, { small: true }, (qr_ascii) => {
-    console.log(qr_ascii);
-  });
+  QRCode.generate(qr, { small: true });
 });
 
 client.on("ready", () => {

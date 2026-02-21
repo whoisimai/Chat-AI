@@ -1,2 +1,3 @@
-2026/02/21-09:56:40.248 2d44 Creating DB C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\shared_proto_db\metadata since it was missing.
-2026/02/21-09:56:40.274 2d44 Reusing MANIFEST C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\shared_proto_db\metadata/MANIFEST-000001
+2026/02/21-09:59:52.045 51d8 Reusing MANIFEST C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\shared_proto_db\metadata/MANIFEST-000001
+2026/02/21-09:59:52.047 51d8 Recovering log #3
+2026/02/21-09:59:52.048 51d8 Reusing old log C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\shared_proto_db\metadata/000003.log 
