@@ -56,9 +56,10 @@ client.on("message", async (message) => {
     const senderId = message.from;
     const senderPhoneNumber = senderId.split("@")[0];
     const expectedPhoneNumber = process.env.GF_PHONE_NUMBER;
+    const otherPhoneNumber = process.env.OTHER_PHONE_NUMBER
 
     // Only respond to messages from your girlfriend (compare just the phone number)
-    if (senderPhoneNumber !== expectedPhoneNumber) {
+    if (senderPhoneNumber !== expectedPhoneNumber && senderPhoneNumber !== otherPhoneNumber) {
       console.log(`[IGNORED] Message from unknown number: ${senderId}`);
       return;
     }

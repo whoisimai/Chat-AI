@@ -1,13 +1,28 @@
-2026/02/21-10:48:06.096 4b38 Reusing MANIFEST C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
-2026/02/21-10:48:06.098 4b38 Recovering log #257
-2026/02/21-10:48:06.122 4b38 Reusing old log C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000257.log 
-2026/02/21-10:48:06.147 4b38 Delete type=2 #247
-2026/02/21-10:48:06.147 4b38 Delete type=2 #248
-2026/02/21-10:48:06.147 4b38 Delete type=2 #249
-2026/02/21-10:48:06.147 4b38 Delete type=2 #250
-2026/02/21-10:48:06.147 4b38 Delete type=2 #251
-2026/02/21-10:48:06.147 4b38 Delete type=2 #252
-2026/02/21-10:48:06.147 4b38 Delete type=2 #253
-2026/02/21-10:48:06.159 4b38 Delete type=2 #254
-2026/02/21-10:48:06.159 4b38 Delete type=2 #255
-2026/02/21-10:48:06.159 4b38 Delete type=2 #258
+2026/02/21-11:12:35.534 4ce8 Reusing MANIFEST C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/MANIFEST-000001
+2026/02/21-11:12:35.536 4ce8 Recovering log #257
+2026/02/21-11:12:35.693 4ce8 Reusing old log C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\IndexedDB\https_web.whatsapp.com_0.indexeddb.leveldb/000257.log 
+2026/02/21-11:14:32.187 4d84 Level-0 table #270: started
+2026/02/21-11:14:32.271 4d84 Level-0 table #270: 1337870 bytes OK
+2026/02/21-11:14:32.277 4d84 Delete type=0 #257
+2026/02/21-11:14:34.470 4d84 Compacting 1@1 + 9@2 files
+2026/02/21-11:14:34.804 4d84 Generated table #271@1: 44774 keys, 2178854 bytes
+2026/02/21-11:14:35.054 4d84 Generated table #272@1: 103056 keys, 2254950 bytes
+2026/02/21-11:14:35.234 4d84 Generated table #273@1: 65531 keys, 2233591 bytes
+2026/02/21-11:14:35.359 4d84 Generated table #274@1: 9279 keys, 2162918 bytes
+2026/02/21-11:14:35.433 4d84 Generated table #275@1: 2436 keys, 2150228 bytes
+2026/02/21-11:14:35.510 4d84 Generated table #276@1: 2179 keys, 2147448 bytes
+2026/02/21-11:14:35.621 4d84 Generated table #277@1: 2441 keys, 2149248 bytes
+2026/02/21-11:14:35.722 4d84 Generated table #278@1: 24637 keys, 2219608 bytes
+2026/02/21-11:14:35.824 4d84 Generated table #279@1: 29460 keys, 2071540 bytes
+2026/02/21-11:14:35.825 4d84 Compacted 1@1 + 9@2 files => 19568385 bytes
+2026/02/21-11:14:35.825 4d84 compacted to: files[ 0 0 9 0 0 0 0 ]
+2026/02/21-11:14:35.826 4d84 Delete type=2 #259
+2026/02/21-11:14:35.826 4d84 Delete type=2 #260
+2026/02/21-11:14:35.826 4d84 Delete type=2 #261
+2026/02/21-11:14:35.826 4d84 Delete type=2 #262
+2026/02/21-11:14:35.826 4d84 Delete type=2 #263
+2026/02/21-11:14:35.826 4d84 Delete type=2 #264
+2026/02/21-11:14:35.826 4d84 Delete type=2 #265
+2026/02/21-11:14:35.827 4d84 Delete type=2 #266
+2026/02/21-11:14:35.827 4d84 Delete type=2 #267
+2026/02/21-11:14:35.827 4d84 Delete type=2 #270

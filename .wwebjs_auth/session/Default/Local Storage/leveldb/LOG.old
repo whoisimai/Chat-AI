@@ -1,3 +1,6 @@
-2026/02/21-10:48:05.469 2690 Reusing MANIFEST C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
-2026/02/21-10:48:05.483 2690 Recovering log #3
-2026/02/21-10:48:05.490 2690 Reusing old log C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\Local Storage\leveldb/000003.log 
+2026/02/21-11:12:34.174 56ac Reusing MANIFEST C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
+2026/02/21-11:12:34.188 56ac Recovering log #3
+2026/02/21-11:12:34.194 56ac Reusing old log C:\Users\eltal\Documents\GitHub\Chat-AI\.wwebjs_auth\session\Default\Local Storage\leveldb/000003.log 
+2026/02/21-11:13:34.211 3230 Level-0 table #5: started
+2026/02/21-11:13:34.230 3230 Level-0 table #5: 19695 bytes OK
+2026/02/21-11:13:34.234 3230 Delete type=0 #3
