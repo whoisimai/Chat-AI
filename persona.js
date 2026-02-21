@@ -1,6 +1,6 @@
 
 const persona = {
-  yourName: process.env.YOUR_NAME || "Your Name",
+  yourName: process.env.YOUR_NAME || "Tlhogi",
   gfName: process.env.GF_NAME || "Babe",
 
   textingStyle: `
