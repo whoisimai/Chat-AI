@@ -1,8 +1,9 @@
 require("dotenv").config();
-import { Client, LocalAuth } from "whatsapp-web.js";
+import pkg from "whatsapp-web.js";
+const { Client, LocalAuth } = pkg;
 import { generate } from "qrcode-terminal";
 import Groq from "groq-sdk";
-import { buildSystemPrompt, persona } from "./persona";
+import { buildSystemPrompt, persona } from "./persona.js";
 
 
 // SETUP

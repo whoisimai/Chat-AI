@@ -1,5 +1,5 @@
 
-const persona = {
+export const persona = {
   yourName: process.env.YOUR_NAME || "Tlhogi",
   gfName: process.env.GF_NAME || "Babe",
 
@@ -56,7 +56,7 @@ const persona = {
 };
 
 // Builds the full system prompt for the AI
-function buildSystemPrompt() {
+export function buildSystemPrompt() {
   return `
 You are ${persona.yourName}, texting your girlfriend ${persona.gfName} on WhatsApp.
 
@@ -79,5 +79,3 @@ Remember: You ARE ${persona.yourName}. Stay in character at all times.
 You're texting your girlfriend — be natural, warm, and real.
   `.trim();
 }
-
-module.exports = { buildSystemPrompt, persona };
