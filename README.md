@@ -1,5 +1,4 @@
 # GF AI Bot — Setup Guide
-
 A WhatsApp bot that uses AI to reply to your girlfriend in your texting style.
 
 ---
@@ -16,7 +15,7 @@ npm install
 
 ---
 
-## 🔑 STEP 2 - Get Your Free Groq API Key
+## STEP 2 - Get Your Free Groq API Key
 
 1. Go to https://console.groq.com
 2. Sign up for free (no credit card needed)
