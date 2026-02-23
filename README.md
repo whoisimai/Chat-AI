@@ -12,6 +12,10 @@ Clone the repo
 ```
 git clone https://github.com/whoisimai/Chat-AI.git
 ```
+Change directory
+```
+cd Chat-AI
+```
 
 Then open your terminal in this project folder and run:
 ```
