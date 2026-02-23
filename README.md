@@ -4,7 +4,7 @@ A WhatsApp bot that uses AI to reply to your girlfriend in your texting style.
 
 ---
 
-## ⚙️ STEP 1 — Install Requirements
+## STEP 1 - Install Requirements
 
 Make sure you have **Node.js** installed.  
 Download it here: https://nodejs.org (get the LTS version)
@@ -16,7 +16,7 @@ npm install
 
 ---
 
-## 🔑 STEP 2 — Get Your Free Groq API Key
+## 🔑 STEP 2 - Get Your Free Groq API Key
 
 1. Go to https://console.groq.com
 2. Sign up for free (no credit card needed)
@@ -25,9 +25,9 @@ npm install
 
 ---
 
-## 📝 STEP 3 — Fill in Your .env File
+## STEP 3 - Fill in Your .env File
 
-Open the `.env` file and fill in:
+Create the `.env` file and fill in:
 - Your Groq API key
 - Your girlfriend's phone number (with country code, no + sign)
 - Your name and her name
@@ -36,13 +36,13 @@ Example for South Africa:
 ```
 GROQ_API_KEY=gsk_xxxxxxxxxxxxxxxx
 GF_PHONE_NUMBER=27831234567
-YOUR_NAME=Lebo
+YOUR_NAME=Tlhogi
 GF_NAME=Amara
 ```
 
 ---
 
-## 🧠 STEP 4 — Customize Your Persona (MOST IMPORTANT)
+## STEP 4 — Customize Your Persona (MOST IMPORTANT)
 
 Open `persona.js` and fill in:
 - How you text (your style, slang, emojis you use)
@@ -54,7 +54,7 @@ Open `persona.js` and fill in:
 
 ---
 
-## ▶️ STEP 5 — Run the Bot
+## STEP 5 — Run the Bot
 
 ```
 npm start
@@ -65,13 +65,13 @@ A QR code will appear in your terminal.
 1. Open WhatsApp on your phone
 2. Go to **Settings > Linked Devices > Link a Device**
 3. Scan the QR code
-4. The bot will say "✅ Bot is live!"
+4. The bot will say "Bot is live!"
 
 From now on, when your girlfriend texts you, the AI will reply automatically.
 
 ---
 
-## ⚠️ IMPORTANT NOTES
+## IMPORTANT NOTES
 
 - **Keep your PC on** for the bot to keep running (or host it on Oracle Cloud Free Tier)
 - The bot only replies to messages from the number you set in `.env`
@@ -80,7 +80,7 @@ From now on, when your girlfriend texts you, the AI will reply automatically.
 
 ---
 
-## 🔄 Switching the AI Model
+## Switching the AI Model
 
 In `index.js`, you can change the model to any free Groq model:
 - `llama-3.1-8b-instant` — fast and lightweight (default)
@@ -89,13 +89,13 @@ In `index.js`, you can change the model to any free Groq model:
 
 ---
 
-## 🛑 To Stop the Bot
+## To Stop the Bot
 
 Press `Ctrl + C` in the terminal.
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 gf-ai-bot/
