@@ -1,7 +1,4 @@
-# GF AI Bot — Setup Guide
-A WhatsApp bot that uses AI to reply to your girlfriend in your texting style.
-
----
+# A WhatsApp bot that uses AI to reply to your girlfriend in your texting style.
 
 ## STEP 1 - Install Requirements
 
