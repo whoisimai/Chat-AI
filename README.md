@@ -8,6 +8,11 @@ A WhatsApp bot that uses AI to reply to your girlfriend in your texting style.
 Make sure you have **Node.js** installed.  
 Download it here: https://nodejs.org (get the LTS version)
 
+Clone the repo
+```
+git clone https://github.com/whoisimai/Chat-AI.git
+```
+
 Then open your terminal in this project folder and run:
 ```
 npm install
