@@ -22,27 +22,103 @@ const MAX_HISTORY = 20;
 // Her WhatsApp ID format: phonenumber@c.us
 const GF_CHAT_ID = `${process.env.GF_PHONE_NUMBER}@c.us`;
 
-// Load embeddings
+// LOAD EMBEDDINGS (LOCAL VECTOR DB)
 const embeddingsData = JSON.parse(
   fs.readFileSync("./embeddings.json", "utf-8")
 );
 
-// COSINE SIMILARITY
-function cosineSimilarity(vecA, vecB) {
-  const dot = vecA.reduce((sum, a, i) => sum + a * vecB[i], 0);
-  const normA = Math.sqrt(vecA.reduce((sum, a) => sum + a * a, 0));
-  const normB = Math.sqrt(vecB.reduce((sum, b) => sum + b * b, 0));
-  return dot / (normA * normB);
+// LOAD EMBEDDING MODEL (LOCAL)
+let embedder;
+async function loadEmbedder() {
+  if (!embedder) {
+    console.log("Loading local embedding model...");
+    embedder = await pipeline(
+      "feature-extraction",
+      "Xenova/all-MiniLM-L6-v2"
+    );
+  }
 }
 
-// RETRIEVE TOP K SIMILAR CHUNKS
-async function retrieveRelevantContext(message, topK = 3) {
-  const embeddingResponse = await groq.embeddings.create({
-    model: "text-embedding-3-small",
-    input: message,
+// COSINE SIMILARITY
+function cosineSimilarity(a, b) {
+  let dot = 0;
+  let magA = 0;
+  let magB = 0;
+
+  for (let i = 0; i < a.length; i++) {
+    dot += a[i] * b[i];
+    magA += a[i] * a[i];
+    magB += b[i] * b[i];
+  }
+  return dot / (Math.sqrt(magA) * Math.sqrt(magB));
+}
+
+import fs from "fs";
+import dotenv from "dotenv";
+import Groq from "groq-sdk";
+import pkg from "whatsapp-web.js";
+import { pipeline } from "@xenova/transformers";
+import QRCode from "qrcode-terminal";
+import { buildSystemPrompt, persona } from "./persona.js";
+
+dotenv.config();
+
+const { Client, LocalAuth } = pkg;
+
+// -----------------------------
+// GROQ (LLM ONLY)
+// -----------------------------
+const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+
+// -----------------------------
+// LOAD EMBEDDINGS (LOCAL VECTOR DB)
+// -----------------------------
+const embeddingsData = JSON.parse(
+  fs.readFileSync("./embeddings.json", "utf-8")
+);
+
+// -----------------------------
+// LOAD EMBEDDING MODEL (LOCAL)
+// -----------------------------
+let embedder;
+async function loadEmbedder() {
+  if (!embedder) {
+    console.log("Loading local embedding model...");
+    embedder = await pipeline(
+      "feature-extraction",
+      "Xenova/all-MiniLM-L6-v2"
+    );
+  }
+}
+
+// -----------------------------
+// COSINE SIMILARITY
+// -----------------------------
+function cosineSimilarity(a, b) {
+  let dot = 0;
+  let magA = 0;
+  let magB = 0;
+
+  for (let i = 0; i < a.length; i++) {
+    dot += a[i] * b[i];
+    magA += a[i] * a[i];
+    magB += b[i] * b[i];
+  }
+
+  return dot / (Math.sqrt(magA) * Math.sqrt(magB));
+}
+
+
+// RETRIEVE CONTEXT (RAG)
+async function retrieveContext(message, topK = 3) {
+  await loadEmbedder();
+
+  const output = await embedder(message, {
+    pooling: "mean",
+    normalize: true,
   });
 
-  const queryEmbedding = embeddingResponse.data[0].embedding;
+  const queryEmbedding = Array.from(output.data);
 
   const scored = embeddingsData.map((item) => ({
     text: item.text,
@@ -53,6 +129,7 @@ async function retrieveRelevantContext(message, topK = 3) {
 
   return scored.slice(0, topK).map((item) => item.text);
 }
+
 
 // WHATSAPP CLIENT
 
@@ -72,12 +149,17 @@ async function getAIReply(userId, userMessage) {
     conversationHistory[userId] = [];
   }
 
-  const relevantContext = await retrieveRelevantContext(userMessage);
+    // 🔥 RAG STEP
+  const relevantContext = await retrieveContext(userMessage, 3);
 
-   const ragContext = `
-    Here are examples of how I usually text:
+  const ragContext = `
+    Here are examples of how I usually respond in similar situations:
 
     ${relevantContext.join("\n\n")}
+
+    Use this to guide tone, emotion, and phrasing.
+    Do NOT copy directly.
+    Do NOT mention it.
     `;
 
   // Add her message to history
@@ -95,8 +177,14 @@ async function getAIReply(userId, userMessage) {
   const response = await groq.chat.completions.create({
     model: "llama-3.3-70b-versatile", // Free, fast Llama model on Groq
     messages: [
-      { role: "system", content: ragContext},
-      { role: "system",  content: buildSystemPrompt()}
+      { 
+        role: "system",  
+        content: buildSystemPrompt(),
+      },
+      {
+         role: "system",
+        content: ragContext,
+      }
       ,
       ...conversationHistory[userId],
     ],
@@ -114,7 +202,6 @@ async function getAIReply(userId, userMessage) {
 
   return reply;
 }
-
 
 
 // QR CODE — Scan this to log in
