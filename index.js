@@ -21,6 +21,11 @@ const MAX_HISTORY = 20;
 // Her WhatsApp ID format: phonenumber@c.us
 const GF_CHAT_ID = `${process.env.GF_PHONE_NUMBER}@c.us`;
 
+// Load embeddings
+const embeddingsData = JSON.parse(
+  fs.readFileSync("./embeddings.json", "utf-8")
+);
+
 
 // WHATSAPP CLIENT
 
