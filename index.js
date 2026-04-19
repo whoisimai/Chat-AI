@@ -53,10 +53,6 @@ async function retrieveRelevantContext(message, topK = 3) {
   return scored.slice(0, topK).map((item) => item.text);
 }
 
-
-
-
-
 // WHATSAPP CLIENT
 
 const client = new Client({
@@ -65,67 +61,6 @@ const client = new Client({
     headless: true,
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
   },
-});
-
-
-// QR CODE — Scan this to log in
-client.on("qr", (qr) => {
-  console.log("\nScan this QR code with WhatsApp on your phone:");
-  console.log("   (WhatsApp > Linked Devices > Link a Device)\n");
-  QRCode.generate(qr, { small: true });
-});
-
-client.on("ready", () => {
-  console.log("Bot is live and listening for messages from", persona.gfName);
-  console.log("   Watching number:", process.env.GF_PHONE_NUMBER);
-});
-
-client.on("auth_failure", () => {
-  console.error("Auth failed — delete the .wwebjs_auth folder and restart");
-});
-
-
-// INCOMING MESSAGE HANDLER
-client.on("message", async (message) => {
-  try {
-    // For group messages, use participant; for individual chats, use from
-    const senderId = message.from;
-    const senderPhoneNumber = senderId.split("@")[0];
-    const expectedPhoneNumber = process.env.GF_PHONE_NUMBER;
-    const otherPhoneNumber = process.env.OTHER_PHONE_NUMBER
-
-    // Only respond to messages from your girlfriend (compare just the phone number)
-    if (senderPhoneNumber !== expectedPhoneNumber && senderPhoneNumber !== otherPhoneNumber) {
-      console.log(`[IGNORED] Message from unknown number: ${senderId}`);
-      return;
-    }
-
-    // Ignore your own messages
-    if (message.fromMe) return;
-
-    const incomingText = message.body;
-    console.log(`\n ${persona.gfName}: ${incomingText}`);
-
-    // Show "typing..." indicator so it feels real
-    const chat = await message.getChat();
-    await chat.sendStateTyping();
-
-    // Get AI response
-    const reply = await getAIReply(senderId, incomingText);
-
-    // Random delay between 2-6 seconds (feels more natural)
-    const delay = Math.floor(Math.random() * 4000) + 2000;
-    await sleep(delay);
-
-    // Stop typing and send the reply
-    await chat.clearState();
-    await message.reply(reply);
-
-    console.log(`You (AI): ${reply}`);
-
-  } catch (error) {
-    console.error("Error handling message:", error.message);
-  }
 });
 
 
@@ -178,6 +113,67 @@ async function getAIReply(userId, userMessage) {
 
   return reply;
 }
+
+
+
+// QR CODE — Scan this to log in
+client.on("qr", (qr) => {
+  console.log("\nScan this QR code with WhatsApp on your phone:");
+  console.log("   (WhatsApp > Linked Devices > Link a Device)\n");
+  QRCode.generate(qr, { small: true });
+});
+
+client.on("ready", () => {
+  console.log("Bot is live and listening for messages from", persona.gfName);
+  console.log("   Watching number:", process.env.GF_PHONE_NUMBER);
+});
+
+client.on("auth_failure", () => {
+  console.error("Auth failed — delete the .wwebjs_auth folder and restart");
+});
+
+// INCOMING MESSAGE HANDLER
+client.on("message", async (message) => {
+  try {
+    // For group messages, use participant; for individual chats, use from
+    const senderId = message.from;
+    const senderPhoneNumber = senderId.split("@")[0];
+    const expectedPhoneNumber = process.env.GF_PHONE_NUMBER;
+    const otherPhoneNumber = process.env.OTHER_PHONE_NUMBER
+
+    // Only respond to messages from your girlfriend (compare just the phone number)
+    if (senderPhoneNumber !== expectedPhoneNumber && senderPhoneNumber !== otherPhoneNumber) {
+      console.log(`[IGNORED] Message from unknown number: ${senderId}`);
+      return;
+    }
+
+    // Ignore your own messages
+    if (message.fromMe) return;
+
+    const incomingText = message.body;
+    console.log(`\n ${persona.gfName}: ${incomingText}`);
+
+    // Show "typing..." indicator so it feels real
+    const chat = await message.getChat();
+    await chat.sendStateTyping();
+
+    // Get AI response
+    const reply = await getAIReply(senderId, incomingText);
+
+    // Random delay between 2-6 seconds (feels more natural)
+    const delay = Math.floor(Math.random() * 4000) + 2000;
+    await sleep(delay);
+
+    // Stop typing and send the reply
+    await chat.clearState();
+    await message.reply(reply);
+
+    console.log(`You (AI): ${reply}`);
+
+  } catch (error) {
+    console.error("Error handling message:", error.message);
+  }
+});
 
 // HELPER
 function sleep(ms) {
