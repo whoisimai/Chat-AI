@@ -1,24 +1,17 @@
 import fs from "fs";
-import dotenv from "dotenv";
-import Groq from "groq-sdk";
-
-dotenv.config();
-
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
+import { pipeline } from "@xenova/transformers";
 
 // CONFIG
 const CHAT_FILE = "./Chat.txt";
 const OUTPUT_FILE = "./embeddings.json";
-const YOUR_NAME = "Tlhogi💕";
-const CHUNK_SIZE = 500;  // characters per chunk
+const YOUR_NAME = "Tlhogi💕"; // change if needed
+const CHUNK_SIZE = 500;
 
-// 1️ Read chat file
-const rawChat = fs.readFileSync(CHAT_FILE, "utf-8");
-
-// 2️ Extract only YOUR messages
+// -----------------------------
+// EXTRACT YOUR MESSAGES
+// -----------------------------
 function extractYourMessages(text) {
   const lines = text.split("\n");
-
   const messages = [];
 
   for (const line of lines) {
@@ -36,7 +29,9 @@ function extractYourMessages(text) {
   return messages;
 }
 
-// 3️ Chunk messages
+// -----------------------------
+// CHUNKING
+// -----------------------------
 function chunkMessages(messages) {
   const chunks = [];
   let currentChunk = "";
@@ -57,32 +52,42 @@ function chunkMessages(messages) {
   return chunks;
 }
 
-// 4️ Create embeddings
+// -----------------------------
+// GENERATE EMBEDDINGS
+// -----------------------------
 async function generateEmbeddings() {
+  console.log("Loading embedding model (first run may take 30–60s)...");
+
+  const embedder = await pipeline(
+    "feature-extraction",
+    "Xenova/all-MiniLM-L6-v2"
+  );
+
+  const rawChat = fs.readFileSync(CHAT_FILE, "utf-8");
   const messages = extractYourMessages(rawChat);
   const chunks = chunkMessages(messages);
 
-  console.log(`Found ${chunks.length} chunks. Generating embeddings...`);
+  console.log(`Found ${chunks.length} chunks.`);
+  console.log("Generating embeddings...");
 
   const embeddings = [];
 
   for (let i = 0; i < chunks.length; i++) {
-    console.log(`Embedding chunk ${i + 1}/${chunks.length}`);
+    console.log(`Embedding ${i + 1}/${chunks.length}`);
 
-    const response = await groq.embeddings.create({
-      model: "text-embedding-3-small",
-      input: chunks[i],
+    const output = await embedder(chunks[i], {
+      pooling: "mean",
+      normalize: true,
     });
 
     embeddings.push({
       text: chunks[i],
-      embedding: response.data[0].embedding,
+      embedding: Array.from(output.data),
     });
   }
 
   fs.writeFileSync(OUTPUT_FILE, JSON.stringify(embeddings, null, 2));
-
-  console.log("Embeddings saved to embeddings.json");
+  console.log("✅ Embeddings saved to embeddings.json");
 }
 
 generateEmbeddings();
