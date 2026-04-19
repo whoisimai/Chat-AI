@@ -1,12 +1,13 @@
 import dotenv from "dotenv";
 import pkg from "whatsapp-web.js";
-const { Client, LocalAuth } = pkg;
+import fs from "fs";
 
 import QRCode from "qrcode-terminal";
 import Groq from "groq-sdk";
 import { buildSystemPrompt, persona } from "./persona.js";
 
 
+const { Client, LocalAuth } = pkg;
 // SETUP
 dotenv.config();
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
