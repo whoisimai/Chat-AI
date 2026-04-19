@@ -53,14 +53,6 @@ function cosineSimilarity(a, b) {
   return dot / (Math.sqrt(magA) * Math.sqrt(magB));
 }
 
-import fs from "fs";
-import dotenv from "dotenv";
-import Groq from "groq-sdk";
-import pkg from "whatsapp-web.js";
-import { pipeline } from "@xenova/transformers";
-import QRCode from "qrcode-terminal";
-import { buildSystemPrompt, persona } from "./persona.js";
-
 dotenv.config();
 
 const { Client, LocalAuth } = pkg;
