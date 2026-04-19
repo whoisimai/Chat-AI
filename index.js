@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import pkg from "whatsapp-web.js";
 import fs from "fs";
+import { pipeline } from "@xenova/transformers";
 
 import QRCode from "qrcode-terminal";
 import Groq from "groq-sdk";
