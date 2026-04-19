@@ -7,7 +7,7 @@ dotenv.config();
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 // CONFIG
-const CHAT_FILE = "./WhatsApp Chat.txt";
+const CHAT_FILE = "./Chat.txt";
 const OUTPUT_FILE = "./embeddings.json";
 const YOUR_NAME = "Tlhogi💕";
 const CHUNK_SIZE = 500;  // characters per chunk
