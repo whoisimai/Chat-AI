@@ -26,6 +26,36 @@ const embeddingsData = JSON.parse(
   fs.readFileSync("./embeddings.json", "utf-8")
 );
 
+// COSINE SIMILARITY
+function cosineSimilarity(vecA, vecB) {
+  const dot = vecA.reduce((sum, a, i) => sum + a * vecB[i], 0);
+  const normA = Math.sqrt(vecA.reduce((sum, a) => sum + a * a, 0));
+  const normB = Math.sqrt(vecB.reduce((sum, b) => sum + b * b, 0));
+  return dot / (normA * normB);
+}
+
+// RETRIEVE TOP K SIMILAR CHUNKS
+async function retrieveRelevantContext(message, topK = 3) {
+  const embeddingResponse = await groq.embeddings.create({
+    model: "text-embedding-3-small",
+    input: message,
+  });
+
+  const queryEmbedding = embeddingResponse.data[0].embedding;
+
+  const scored = embeddingsData.map((item) => ({
+    text: item.text,
+    score: cosineSimilarity(queryEmbedding, item.embedding),
+  }));
+
+  scored.sort((a, b) => b.score - a.score);
+
+  return scored.slice(0, topK).map((item) => item.text);
+}
+
+
+
+
 
 // WHATSAPP CLIENT
 
@@ -106,6 +136,14 @@ async function getAIReply(userId, userMessage) {
     conversationHistory[userId] = [];
   }
 
+  const relevantContext = await retrieveRelevantContext(userMessage);
+
+   const ragContext = `
+    Here are examples of how I usually text:
+
+    ${relevantContext.join("\n\n")}
+    `;
+
   // Add her message to history
   conversationHistory[userId].push({
     role: "user",
@@ -121,10 +159,9 @@ async function getAIReply(userId, userMessage) {
   const response = await groq.chat.completions.create({
     model: "llama-3.3-70b-versatile", // Free, fast Llama model on Groq
     messages: [
-      {
-        role: "system",
-        content: buildSystemPrompt(),
-      },
+      { role: "system", content: ragContext},
+      { role: "system",  content: buildSystemPrompt()}
+      ,
       ...conversationHistory[userId],
     ],
     max_tokens: 150,       // Keep replies short (like real texts)
