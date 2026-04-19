@@ -9,7 +9,7 @@ const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 // CONFIG
 const CHAT_FILE = "./WhatsApp Chat.txt";
 const OUTPUT_FILE = "./embeddings.json";
-const YOUR_NAME = "You"; // Change if export uses your real name
+const YOUR_NAME = "Tlhogi💕";
 const CHUNK_SIZE = 500;  // characters per chunk
 
 // 1️ Read chat file
