@@ -141,7 +141,7 @@ async function getAIReply(userId, userMessage) {
 
     return reply;
   } catch (error) {
-    console.error(`Error getting AI reply: ${error.message}`);
+    console.error(`Error getting Atlas reply: ${error.message}`);
     // Return a fallback message if API fails
     return "sorry babe, I'm having connection issues. try again in a sec 💀";
   }
