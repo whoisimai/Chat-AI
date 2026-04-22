@@ -31,12 +31,17 @@ const client = new Client({
   },
 });
 
+// Track if QR code has already been shown
+let qrCodeShown = false;
 
-// QR CODE — Scan this to log in
+// QR CODE — Scan this to log in (only show once)
 client.on("qr", (qr) => {
-  console.log("\nScan this QR code with WhatsApp on your phone:");
-  console.log("   (WhatsApp > Linked Devices > Link a Device)\n");
-  QRCode.generate(qr, { small: true });
+  if (!qrCodeShown) {
+    console.log("\nScan this QR code with WhatsApp on your phone:");
+    console.log("   (WhatsApp > Linked Devices > Link a Device)\n");
+    QRCode.generate(qr, { small: true });
+    qrCodeShown = true;
+  }
 });
 
 client.on("ready", () => {
@@ -111,29 +116,35 @@ async function getAIReply(userId, userMessage) {
     conversationHistory[userId] = conversationHistory[userId].slice(-MAX_HISTORY);
   }
 
-  // Call Groq API
-  const response = await groq.chat.completions.create({
-    model: "llama-3.3-70b-versatile", // Free, fast Llama model on Groq
-    messages: [
-      {
-        role: "system",
-        content: buildSystemPrompt(),
-      },
-      ...conversationHistory[userId],
-    ],
-    max_tokens: 150,       // Keep replies short (like real texts)
-    temperature: 0.85,     // A bit of randomness so it doesn't sound repetitive
-  });
+  try {
+    // Call Groq API
+    const response = await groq.chat.completions.create({
+      model: "llama-3.3-70b-versatile", // Free, fast Llama model on Groq
+      messages: [
+        {
+          role: "system",
+          content: buildSystemPrompt(),
+        },
+        ...conversationHistory[userId],
+      ],
+      max_tokens: 150,       // Keep replies short (like real texts)
+      temperature: 0.85,     // A bit of randomness so it doesn't sound repetitive
+    });
 
-  const reply = response.choices[0].message.content.trim();
+    const reply = response.choices[0].message.content.trim();
 
-  // Add AI reply to history so it remembers what "you" said
-  conversationHistory[userId].push({
-    role: "assistant",
-    content: reply,
-  });
+    // Add AI reply to history so it remembers what "you" said
+    conversationHistory[userId].push({
+      role: "assistant",
+      content: reply,
+    });
 
-  return reply;
+    return reply;
+  } catch (error) {
+    console.error(`Error getting AI reply: ${error.message}`);
+    // Return a fallback message if API fails
+    return "sorry babe, I'm having connection issues. try again in a sec 💀";
+  }
 }
 
 // HELPER
@@ -141,6 +152,15 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+// GLOBAL ERROR HANDLER for unhandled promise rejections
+process.on("unhandledRejection", (reason, promise) => {
+  console.error("Unhandled Rejection at:", promise, "reason:", reason);
+  // Log the error but don't crash the bot
+});
+
 // START THE BOT
 console.log("Starting WhatsApp AI bot...");
-client.initialize();
+client.initialize().catch((error) => {
+  console.error("Failed to initialize client:", error.message);
+  process.exit(1);
+});
