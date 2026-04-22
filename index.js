@@ -80,7 +80,13 @@ client.on("message", async (message) => {
     await chat.sendStateTyping();
 
     // Get AI response
-    const reply = await getAIReply(senderId, incomingText);
+
+    if(senderPhoneNumber === expectedPhoneNumber){
+
+      const reply = await getAIReply(senderId, incomingText, buildSystemPrompt());
+    } else if(senderPhoneNumber === otherPhoneNumber){
+
+    }
 
     // Random delay between 2-6 seconds (feels more natural)
     const delay = Math.floor(Math.random() * 4000) + 2000;
@@ -99,7 +105,7 @@ client.on("message", async (message) => {
 
 
 // AI RESPONSE FUNCTION
-async function getAIReply(userId, userMessage) {
+async function getAIReply(userId, userMessage, sysPrompt) {
   // Initialize conversation history for this user if first time
   if (!conversationHistory[userId]) {
     conversationHistory[userId] = [];
@@ -123,7 +129,7 @@ async function getAIReply(userId, userMessage) {
       messages: [
         {
           role: "system",
-          content: buildSystemPrompt(),
+          content: sysPrompt(),
         },
         ...conversationHistory[userId],
       ],
