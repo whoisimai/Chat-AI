@@ -45,7 +45,7 @@ client.on("qr", (qr) => {
 });
 
 client.on("ready", () => {
-  console.log("Bot is live and listening for messages from", persona.gfName);
+  console.log("Atlas is live and listening for messages from", persona.gfName);
   console.log("   Watching number:", process.env.GF_PHONE_NUMBER);
 });
 
@@ -90,7 +90,7 @@ client.on("message", async (message) => {
     await chat.clearState();
     await message.reply(reply);
 
-    console.log(`You (AI): ${reply}`);
+    console.log(`You (Atlas): ${reply}`);
 
   } catch (error) {
     console.error("Error handling message:", error.message);
@@ -159,7 +159,7 @@ process.on("unhandledRejection", (reason, promise) => {
 });
 
 // START THE BOT
-console.log("Starting WhatsApp AI bot...");
+console.log("Starting Atlas...");
 client.initialize().catch((error) => {
   console.error("Failed to initialize client:", error.message);
   process.exit(1);
