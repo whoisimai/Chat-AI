@@ -5,6 +5,7 @@ const { Client, LocalAuth } = pkg;
 import QRCode from "qrcode-terminal";
 import Groq from "groq-sdk";
 import { buildSystemPrompt, persona } from "./persona.js";
+import { buildSystemPrompt2, persona2 } from "./2persona.js";
 
 
 // SETUP
@@ -74,6 +75,7 @@ client.on("message", async (message) => {
 
     const incomingText = message.body;
     console.log(`\n ${persona.gfName}: ${incomingText}`);
+    console.log(`\n ${persona2.gfName}: ${incomingText}`);
 
     // Show "typing..." indicator so it feels real
     const chat = await message.getChat();
@@ -82,10 +84,9 @@ client.on("message", async (message) => {
     // Get AI response
 
     if(senderPhoneNumber === expectedPhoneNumber){
-
       const reply = await getAIReply(senderId, incomingText, buildSystemPrompt());
     } else if(senderPhoneNumber === otherPhoneNumber){
-
+      const reply = await getAIReply(senderId, incomingText, buildSystemPrompt2());
     }
 
     // Random delay between 2-6 seconds (feels more natural)
