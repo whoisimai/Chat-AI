@@ -49,13 +49,16 @@ GF_NAME=Amara
 
 ## STEP 4 — Customize Your Persona (MOST IMPORTANT)
 
-Open `persona.js` and fill in:
-- How you text (your style, slang, emojis you use)
-- Your personality
-- Relationship context (inside jokes, shared interests, etc.)
-- How to handle specific situations
+1. Copy `persona.example.js` to a new file named `persona.js`
+2. Open `persona.js` and fill in the bracketed placeholders:
+   - How you text (your style, slang, emojis you use)
+   - Your personality traits
+   - Relationship context (inside jokes, shared interests, duration, etc.)
+   - How to handle specific situations
 
 **The more detail here = the more it sounds like you.**
+
+**Note:** If you're using `2persona.js` for a second relationship, do the same with `2persona.example.js`.
 
 ---
 
